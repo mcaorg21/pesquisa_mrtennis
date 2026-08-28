@@ -53,16 +53,17 @@
       // autoplay bloqueado pelo navegador: o botao de play fica visivel para o clique iniciar.
     });
 
+  var telaPesquisa = document.querySelector('.tela-pesquisa');
   var form = document.getElementById('pesquisa');
   var mensagem = document.getElementById('mensagem');
   var btnEnviar = document.getElementById('btnEnviar');
   var btnAvancar = document.getElementById('btnAvancar');
   var btnVoltar = document.getElementById('btnVoltar');
   var sucesso = document.getElementById('sucesso');
-  var stepper = document.getElementById('stepper');
+  var progressoFill = document.getElementById('progressoFill');
+  var progressoTexto = document.getElementById('progressoTexto');
 
   var passos = Array.prototype.slice.call(form.querySelectorAll('.passo'));
-  var navBotoes = Array.prototype.slice.call(stepper.querySelectorAll('.passo-nav'));
   var TOTAL = passos.length;
   var atual = 1;
 
@@ -137,24 +138,21 @@
 
   function irPara(numero) {
     atual = numero;
+    var passoAtual = passos[atual - 1];
 
-    passos.forEach(function (passo) {
-      var doPasso = Number(passo.dataset.step);
-      passo.classList.toggle('ativo', doPasso === atual);
+    passos.forEach(function (passo, indice) {
+      passo.classList.toggle('ativo', indice === atual - 1);
     });
 
-    navBotoes.forEach(function (btn) {
-      var doBotao = Number(btn.dataset.goto);
-      btn.classList.toggle('atual', doBotao === atual);
-      btn.classList.toggle('concluido', doBotao < atual);
-    });
+    progressoFill.style.width = (atual / TOTAL * 100) + '%';
+    progressoTexto.textContent = passoAtual.dataset.tema + ' · ' + atual + ' de ' + TOTAL;
 
     btnVoltar.hidden = atual === 1;
     btnAvancar.hidden = atual === TOTAL;
     btnEnviar.hidden = atual !== TOTAL;
 
     limparMensagem();
-    window.scrollTo({ top: stepper.offsetTop - 12, behavior: 'smooth' });
+    form.querySelector('.area-passo').scrollTop = 0;
   }
 
   btnAvancar.addEventListener('click', function () {
@@ -163,12 +161,6 @@
 
   btnVoltar.addEventListener('click', function () {
     if (atual > 1) irPara(atual - 1);
-  });
-
-  navBotoes.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      irPara(Number(btn.dataset.goto));
-    });
   });
 
   function coletarDados() {
@@ -204,10 +196,8 @@
         return resp.json();
       })
       .then(function () {
-        stepper.hidden = true;
-        form.hidden = true;
+        telaPesquisa.hidden = true;
         sucesso.hidden = false;
-        sucesso.scrollIntoView({ behavior: 'smooth', block: 'start' });
       })
       .catch(function (err) {
         mostrarErro(err.message || 'Erro ao enviar. Tente novamente.');

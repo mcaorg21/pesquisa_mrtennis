@@ -43,11 +43,70 @@ body {
 a { color: var(--accent); }
 
 #conteudoPesquisa {
-  display: contents;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 #conteudoPesquisa[hidden] {
   display: none;
+}
+
+.tela-pesquisa {
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.tela-pesquisa[hidden] {
+  display: none;
+}
+
+.topo-pesquisa {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo-mini {
+  height: 32px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.progresso {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.progresso-trilho {
+  height: 4px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progresso-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width .3s ease;
+}
+
+.progresso-texto {
+  margin: 0;
+  color: var(--muted);
+  font-size: .75rem;
 }
 
 .portao {
@@ -207,30 +266,6 @@ a { color: var(--accent); }
 
 #mensagemPortao.erro { color: var(--danger); }
 
-.topo {
-  padding: var(--space-5) var(--space-5) var(--space-3);
-  display: flex;
-  justify-content: center;
-}
-
-.logo {
-  height: 56px;
-  width: auto;
-}
-
-main {
-  flex: 1;
-  width: 100%;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 var(--space-4) var(--space-8);
-}
-
-.intro {
-  text-align: center;
-  padding: var(--space-5) 0 var(--space-6);
-}
-
 .kicker {
   color: var(--accent);
   text-transform: uppercase;
@@ -238,12 +273,6 @@ main {
   font-size: .75rem;
   font-weight: 700;
   margin: 0 0 var(--space-2);
-}
-
-.intro h1 {
-  font-size: clamp(1.6rem, 4vw, 2.25rem);
-  line-height: 1.2;
-  margin: 0 0 var(--space-4);
 }
 
 .lead {
@@ -257,86 +286,41 @@ main {
   font-size: .9rem;
 }
 
-.stepper {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-1);
-  margin-bottom: var(--space-5);
-  padding: var(--space-2);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  overflow-x: auto;
-}
-
-.passo-nav {
+#pesquisa {
   flex: 1;
   display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  background: none;
-  border: none;
-  color: var(--muted);
-  padding: var(--space-2) var(--space-3);
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: .82rem;
-  white-space: nowrap;
-  transition: color .15s ease, background .15s ease;
+  flex-direction: column;
+  min-height: 0;
 }
 
-.passo-nav:hover { color: var(--text); }
-
-.bolha {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  font-size: .75rem;
-  font-weight: 700;
-  flex-shrink: 0;
-  transition: background .15s ease, border-color .15s ease, color .15s ease;
-}
-
-.passo-nav.concluido .bolha {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-ink);
-}
-
-.passo-nav.atual {
-  color: var(--text);
-  background: var(--surface-2);
-}
-
-.passo-nav.atual .bolha {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.rotulo-passo {
-  display: none;
-}
-
-@media (min-width: 640px) {
-  .rotulo-passo { display: inline; }
-}
-
-form {
+.area-passo {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  justify-content: center;
+  padding: var(--space-6) var(--space-5);
 }
 
-fieldset.passo {
+.passo {
   display: none;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
-fieldset.passo.ativo {
+.passo.ativo {
   display: flex;
+}
+
+.passo-pergunta {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 0 var(--space-1);
 }
 
 .campo-nome {
@@ -352,50 +336,6 @@ fieldset.passo.ativo {
 .campo-nome label {
   font-weight: 600;
   font-size: .95rem;
-}
-
-fieldset {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
-}
-
-legend {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  font-size: 1.05rem;
-  font-weight: 700;
-  padding: 0 var(--space-2);
-}
-
-.num {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-size: .85rem;
-  font-weight: 800;
-}
-
-.pergunta {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.pergunta > p, .pergunta > label {
-  font-size: .95rem;
-  font-weight: 600;
-  margin: 0;
 }
 
 .dica {
@@ -508,11 +448,13 @@ input.outro {
 }
 
 .navegacao {
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--space-3);
-  padding-top: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-top: 1px solid var(--border);
 }
 
 .btn-primario, .btn-secundario {
@@ -550,12 +492,27 @@ input.outro {
 #mensagem.ok { color: var(--accent); }
 
 .sucesso {
+  flex: 1;
   text-align: center;
-  padding: var(--space-8) 0;
+  padding: var(--space-8) var(--space-4);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: var(--space-4);
+}
+
+.sucesso[hidden] {
+  display: none;
+}
+
+.video-agradecimento {
+  width: 100%;
+  max-width: 420px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: #000;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .45);
 }
 
 .logo-sucesso {
@@ -575,19 +532,13 @@ input.outro {
   font-size: 1rem;
 }
 
-.rodape {
-  text-align: center;
-  color: var(--muted);
-  font-size: .8rem;
-  padding: var(--space-5) 0;
-}
-
 @media (max-width: 480px) {
-  .campo-nome, fieldset {
+  .campo-nome {
     padding: var(--space-4);
     border-radius: var(--radius);
   }
 
-  .topo { padding: var(--space-4) var(--space-4) var(--space-2); }
-  .logo { height: 44px; }
+  .topo-pesquisa { padding: var(--space-3) var(--space-4); }
+  .area-passo { padding: var(--space-4); }
+  .navegacao { padding: var(--space-3) var(--space-4); }
 }

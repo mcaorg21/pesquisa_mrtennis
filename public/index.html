@@ -50,299 +50,256 @@
 </div>
 
 <div id="conteudoPesquisa" hidden>
+  <div class="tela-pesquisa">
 
-<header class="topo">
-  <img src="/logo.png" alt="Mr. Tennis" class="logo">
-</header>
-
-<main>
-  <section class="intro">
-    <p class="kicker">Pesquisa de satisfação</p>
-    <h1>Como estão indo suas aulas?</h1>
-    <p class="lead">
-      Quero entender melhor como você está se sentindo nas aulas, o que busca no tênis e onde
-      podemos melhorar. A pesquisa também ajuda na organização das turmas, aproximando alunos
-      com objetivos, níveis e necessidades semelhantes.
-    </p>
-    <p class="lead sutil">
-      Responda com sinceridade — não existe resposta certa ou errada. Críticas, sugestões e
-      elogios são muito bem-vindos.
-    </p>
-  </section>
-
-  <nav class="stepper" id="stepper" aria-label="Progresso da pesquisa">
-    <button type="button" class="passo-nav" data-goto="1"><span class="bolha">1</span><span class="rotulo-passo">Sobre você</span></button>
-    <button type="button" class="passo-nav" data-goto="2"><span class="bolha">2</span><span class="rotulo-passo">Experiência</span></button>
-    <button type="button" class="passo-nav" data-goto="3"><span class="bolha">3</span><span class="rotulo-passo">Objetivos</span></button>
-    <button type="button" class="passo-nav" data-goto="4"><span class="bolha">4</span><span class="rotulo-passo">Treino</span></button>
-    <button type="button" class="passo-nav" data-goto="5"><span class="bolha">5</span><span class="rotulo-passo">Expectativas</span></button>
-    <button type="button" class="passo-nav" data-goto="6"><span class="bolha">6</span><span class="rotulo-passo">Turmas</span></button>
-  </nav>
-
-  <form id="pesquisa">
-    <input type="hidden" name="nome" id="nome">
-    <input type="hidden" name="email" id="email">
-
-    <fieldset class="passo" data-step="1">
-      <legend><span class="num">1</span> Sobre você</legend>
-
-      <div class="pergunta">
-        <p>Há quanto tempo você faz aulas comigo?</p>
-        <div class="pills" data-name="tempoAulas" data-type="radio">
-          <label class="pill"><input type="radio" name="tempoAulas" value="Menos de 3 meses"><span>Menos de 3 meses</span></label>
-          <label class="pill"><input type="radio" name="tempoAulas" value="3–6 meses"><span>3–6 meses</span></label>
-          <label class="pill"><input type="radio" name="tempoAulas" value="6–12 meses"><span>6–12 meses</span></label>
-          <label class="pill"><input type="radio" name="tempoAulas" value="1–2 anos"><span>1–2 anos</span></label>
-          <label class="pill"><input type="radio" name="tempoAulas" value="Mais de 2 anos"><span>Mais de 2 anos</span></label>
-        </div>
+    <header class="topo-pesquisa">
+      <img src="/logo.png" alt="Mr. Tennis" class="logo-mini">
+      <div class="progresso">
+        <div class="progresso-trilho"><div class="progresso-fill" id="progressoFill"></div></div>
+        <p class="progresso-texto" id="progressoTexto"></p>
       </div>
+    </header>
 
-      <div class="pergunta">
-        <p>Além das aulas, com que frequência você joga tênis?</p>
-        <div class="pills" data-name="frequenciaJogo" data-type="radio">
-          <label class="pill"><input type="radio" name="frequenciaJogo" value="Não jogo"><span>Não jogo</span></label>
-          <label class="pill"><input type="radio" name="frequenciaJogo" value="Eventualmente"><span>Eventualmente</span></label>
-          <label class="pill"><input type="radio" name="frequenciaJogo" value="1x/semana"><span>1x/semana</span></label>
-          <label class="pill"><input type="radio" name="frequenciaJogo" value="2x/semana"><span>2x/semana</span></label>
-          <label class="pill"><input type="radio" name="frequenciaJogo" value="3x ou mais"><span>3x ou mais</span></label>
-        </div>
-      </div>
-    </fieldset>
+    <form id="pesquisa">
+      <input type="hidden" name="nome" id="nome">
+      <input type="hidden" name="email" id="email">
 
-    <fieldset class="passo" data-step="2">
-      <legend><span class="num">2</span> Sua experiência nas aulas</legend>
+      <div class="area-passo">
 
-      <div class="pergunta">
-        <p>De 1 a 5, como você avalia sua satisfação geral?</p>
-        <div class="escala" data-name="satisfacaoGeral">
-          <span class="ponta">Muito insatisfeito</span>
-          <div class="pills escala-pills">
-            <label class="pill num5"><input type="radio" name="satisfacaoGeral" value="1"><span>1</span></label>
-            <label class="pill num5"><input type="radio" name="satisfacaoGeral" value="2"><span>2</span></label>
-            <label class="pill num5"><input type="radio" name="satisfacaoGeral" value="3"><span>3</span></label>
-            <label class="pill num5"><input type="radio" name="satisfacaoGeral" value="4"><span>4</span></label>
-            <label class="pill num5"><input type="radio" name="satisfacaoGeral" value="5"><span>5</span></label>
+        <div class="passo" data-step="1" data-tema="Sobre você">
+          <p class="passo-pergunta">Há quanto tempo você faz aulas comigo?</p>
+          <div class="pills" data-name="tempoAulas" data-type="radio">
+            <label class="pill"><input type="radio" name="tempoAulas" value="Menos de 3 meses"><span>Menos de 3 meses</span></label>
+            <label class="pill"><input type="radio" name="tempoAulas" value="3–6 meses"><span>3–6 meses</span></label>
+            <label class="pill"><input type="radio" name="tempoAulas" value="6–12 meses"><span>6–12 meses</span></label>
+            <label class="pill"><input type="radio" name="tempoAulas" value="1–2 anos"><span>1–2 anos</span></label>
+            <label class="pill"><input type="radio" name="tempoAulas" value="Mais de 2 anos"><span>Mais de 2 anos</span></label>
           </div>
-          <span class="ponta">Muito satisfeito</span>
         </div>
-      </div>
 
-      <div class="pergunta">
-        <p>Como você avalia a metodologia das aulas?</p>
-        <div class="escala" data-name="metodologia">
-          <span class="ponta">Muito ruim</span>
-          <div class="pills escala-pills">
-            <label class="pill num5"><input type="radio" name="metodologia" value="1"><span>1</span></label>
-            <label class="pill num5"><input type="radio" name="metodologia" value="2"><span>2</span></label>
-            <label class="pill num5"><input type="radio" name="metodologia" value="3"><span>3</span></label>
-            <label class="pill num5"><input type="radio" name="metodologia" value="4"><span>4</span></label>
-            <label class="pill num5"><input type="radio" name="metodologia" value="5"><span>5</span></label>
+        <div class="passo" data-step="2" data-tema="Sobre você">
+          <p class="passo-pergunta">Além das aulas, com que frequência você joga tênis?</p>
+          <div class="pills" data-name="frequenciaJogo" data-type="radio">
+            <label class="pill"><input type="radio" name="frequenciaJogo" value="Não jogo"><span>Não jogo</span></label>
+            <label class="pill"><input type="radio" name="frequenciaJogo" value="Eventualmente"><span>Eventualmente</span></label>
+            <label class="pill"><input type="radio" name="frequenciaJogo" value="1x/semana"><span>1x/semana</span></label>
+            <label class="pill"><input type="radio" name="frequenciaJogo" value="2x/semana"><span>2x/semana</span></label>
+            <label class="pill"><input type="radio" name="frequenciaJogo" value="3x ou mais"><span>3x ou mais</span></label>
           </div>
-          <span class="ponta">Excelente</span>
         </div>
-      </div>
 
-      <div class="pergunta">
-        <p>Você sente que está evoluindo com as aulas?</p>
-        <div class="pills" data-name="evolucao" data-type="radio">
-          <label class="pill"><input type="radio" name="evolucao" value="Sim, bastante"><span>Sim, bastante</span></label>
-          <label class="pill"><input type="radio" name="evolucao" value="Sim, mas poderia evoluir mais"><span>Sim, mas poderia evoluir mais</span></label>
-          <label class="pill"><input type="radio" name="evolucao" value="Pouco"><span>Pouco</span></label>
-          <label class="pill"><input type="radio" name="evolucao" value="Não percebi evolução"><span>Não percebi evolução</span></label>
-          <label class="pill"><input type="radio" name="evolucao" value="Não sei avaliar"><span>Não sei avaliar</span></label>
+        <div class="passo" data-step="3" data-tema="Sua experiência nas aulas">
+          <p class="passo-pergunta">De 1 a 5, como você avalia sua satisfação geral?</p>
+          <div class="escala" data-name="satisfacaoGeral">
+            <span class="ponta">Muito insatisfeito</span>
+            <div class="pills escala-pills">
+              <label class="pill num5"><input type="radio" name="satisfacaoGeral" value="1"><span>1</span></label>
+              <label class="pill num5"><input type="radio" name="satisfacaoGeral" value="2"><span>2</span></label>
+              <label class="pill num5"><input type="radio" name="satisfacaoGeral" value="3"><span>3</span></label>
+              <label class="pill num5"><input type="radio" name="satisfacaoGeral" value="4"><span>4</span></label>
+              <label class="pill num5"><input type="radio" name="satisfacaoGeral" value="5"><span>5</span></label>
+            </div>
+            <span class="ponta">Muito satisfeito</span>
+          </div>
         </div>
-      </div>
 
-      <div class="pergunta">
-        <p>Você recebe atenção e feedback suficientes?</p>
-        <div class="pills" data-name="atencaoFeedback" data-type="radio">
-          <label class="pill"><input type="radio" name="atencaoFeedback" value="Sempre"><span>Sempre</span></label>
-          <label class="pill"><input type="radio" name="atencaoFeedback" value="Na maioria das vezes"><span>Na maioria das vezes</span></label>
-          <label class="pill"><input type="radio" name="atencaoFeedback" value="Às vezes"><span>Às vezes</span></label>
-          <label class="pill"><input type="radio" name="atencaoFeedback" value="Raramente"><span>Raramente</span></label>
-          <label class="pill"><input type="radio" name="atencaoFeedback" value="Nunca"><span>Nunca</span></label>
+        <div class="passo" data-step="4" data-tema="Sua experiência nas aulas">
+          <p class="passo-pergunta">Como você avalia a metodologia das aulas?</p>
+          <div class="escala" data-name="metodologia">
+            <span class="ponta">Muito ruim</span>
+            <div class="pills escala-pills">
+              <label class="pill num5"><input type="radio" name="metodologia" value="1"><span>1</span></label>
+              <label class="pill num5"><input type="radio" name="metodologia" value="2"><span>2</span></label>
+              <label class="pill num5"><input type="radio" name="metodologia" value="3"><span>3</span></label>
+              <label class="pill num5"><input type="radio" name="metodologia" value="4"><span>4</span></label>
+              <label class="pill num5"><input type="radio" name="metodologia" value="5"><span>5</span></label>
+            </div>
+            <span class="ponta">Excelente</span>
+          </div>
         </div>
-      </div>
 
-      <div class="pergunta">
-        <label for="gostaAulas">O que você mais gosta nas aulas?</label>
-        <textarea id="gostaAulas" name="gostaAulas" rows="3"></textarea>
-      </div>
-    </fieldset>
-
-    <fieldset class="passo" data-step="3">
-      <legend><span class="num">3</span> Seus objetivos</legend>
-
-      <div class="pergunta">
-        <p>Qual é seu principal objetivo com o tênis?</p>
-        <div class="pills" data-name="objetivoPrincipal" data-type="radio">
-          <label class="pill"><input type="radio" name="objetivoPrincipal" value="Aprender"><span>Aprender</span></label>
-          <label class="pill"><input type="radio" name="objetivoPrincipal" value="Evoluir tecnicamente"><span>Evoluir tecnicamente</span></label>
-          <label class="pill"><input type="radio" name="objetivoPrincipal" value="Melhorar tática"><span>Melhorar tática</span></label>
-          <label class="pill"><input type="radio" name="objetivoPrincipal" value="Competir"><span>Competir</span></label>
-          <label class="pill"><input type="radio" name="objetivoPrincipal" value="Jogar melhor"><span>Jogar melhor</span></label>
-          <label class="pill"><input type="radio" name="objetivoPrincipal" value="Condicionamento"><span>Condicionamento</span></label>
-          <label class="pill"><input type="radio" name="objetivoPrincipal" value="Diversão"><span>Diversão</span></label>
-          <label class="pill"><input type="radio" name="objetivoPrincipal" value="Socializar"><span>Socializar</span></label>
-          <label class="pill"><input type="radio" name="objetivoPrincipal" value="Alta intensidade"><span>Alta intensidade</span></label>
+        <div class="passo" data-step="5" data-tema="Sua experiência nas aulas">
+          <p class="passo-pergunta">Você sente que está evoluindo com as aulas?</p>
+          <div class="pills" data-name="evolucao" data-type="radio">
+            <label class="pill"><input type="radio" name="evolucao" value="Sim, bastante"><span>Sim, bastante</span></label>
+            <label class="pill"><input type="radio" name="evolucao" value="Sim, mas poderia evoluir mais"><span>Sim, mas poderia evoluir mais</span></label>
+            <label class="pill"><input type="radio" name="evolucao" value="Pouco"><span>Pouco</span></label>
+            <label class="pill"><input type="radio" name="evolucao" value="Não percebi evolução"><span>Não percebi evolução</span></label>
+            <label class="pill"><input type="radio" name="evolucao" value="Não sei avaliar"><span>Não sei avaliar</span></label>
+          </div>
         </div>
-        <input type="text" class="outro" name="objetivoPrincipalOutro" placeholder="Outro (opcional)">
-      </div>
 
-      <div class="pergunta">
-        <label for="objetivos3">Quais são os 3 objetivos mais importantes para você?</label>
-        <textarea id="objetivos3" name="objetivos3" rows="3"></textarea>
-      </div>
-
-      <div class="pergunta">
-        <p>Qual é hoje o principal ponto que você precisa melhorar? <span class="dica">(pode marcar mais de um)</span></p>
-        <div class="pills" data-name="pontoMelhorar" data-type="checkbox">
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Forehand"><span>Forehand</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Backhand"><span>Backhand</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Saque"><span>Saque</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Devolução"><span>Devolução</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Voleio"><span>Voleio</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Smash"><span>Smash</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Slice"><span>Slice</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Movimentação"><span>Movimentação</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Posicionamento"><span>Posicionamento</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Consistência"><span>Consistência</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Potência"><span>Potência</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Controle"><span>Controle</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Tática"><span>Tática</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Tomada de decisão"><span>Tomada de decisão</span></label>
-          <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Confiança"><span>Confiança</span></label>
+        <div class="passo" data-step="6" data-tema="Sua experiência nas aulas">
+          <p class="passo-pergunta">Você recebe atenção e feedback suficientes?</p>
+          <div class="pills" data-name="atencaoFeedback" data-type="radio">
+            <label class="pill"><input type="radio" name="atencaoFeedback" value="Sempre"><span>Sempre</span></label>
+            <label class="pill"><input type="radio" name="atencaoFeedback" value="Na maioria das vezes"><span>Na maioria das vezes</span></label>
+            <label class="pill"><input type="radio" name="atencaoFeedback" value="Às vezes"><span>Às vezes</span></label>
+            <label class="pill"><input type="radio" name="atencaoFeedback" value="Raramente"><span>Raramente</span></label>
+            <label class="pill"><input type="radio" name="atencaoFeedback" value="Nunca"><span>Nunca</span></label>
+          </div>
         </div>
-        <input type="text" class="outro" name="pontoMelhorarOutro" placeholder="Outro (opcional)">
-      </div>
-    </fieldset>
 
-    <fieldset class="passo" data-step="4">
-      <legend><span class="num">4</span> O que você gostaria de treinar?</legend>
-
-      <div class="pergunta">
-        <p>Qual fundamento gostaria que fosse mais trabalhado? <span class="dica">(pode marcar mais de um)</span></p>
-        <div class="pills" data-name="fundamentoTreinar" data-type="checkbox">
-          <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Forehand"><span>Forehand</span></label>
-          <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Backhand"><span>Backhand</span></label>
-          <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Saque"><span>Saque</span></label>
-          <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Devolução"><span>Devolução</span></label>
-          <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Voleio"><span>Voleio</span></label>
-          <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Smash"><span>Smash</span></label>
-          <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Slice"><span>Slice</span></label>
-          <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Drop shot"><span>Drop shot</span></label>
-          <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Approach"><span>Approach</span></label>
-          <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Definição"><span>Definição</span></label>
-          <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Consistência"><span>Consistência</span></label>
-          <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Movimentação"><span>Movimentação</span></label>
+        <div class="passo" data-step="7" data-tema="Sua experiência nas aulas">
+          <label class="passo-pergunta" for="gostaAulas">O que você mais gosta nas aulas?</label>
+          <textarea id="gostaAulas" name="gostaAulas" rows="4"></textarea>
         </div>
-        <input type="text" class="outro" name="fundamentoTreinarOutro" placeholder="Outro (opcional)">
-      </div>
 
-      <div class="pergunta">
-        <p>E na parte tática? <span class="dica">(pode marcar mais de um)</span></p>
-        <div class="pills" data-name="taticaTreinar" data-type="checkbox">
-          <label class="pill"><input type="checkbox" name="taticaTreinar" value="Construção"><span>Construção</span></label>
-          <label class="pill"><input type="checkbox" name="taticaTreinar" value="Ataque"><span>Ataque</span></label>
-          <label class="pill"><input type="checkbox" name="taticaTreinar" value="Defesa"><span>Defesa</span></label>
-          <label class="pill"><input type="checkbox" name="taticaTreinar" value="Rede"><span>Rede</span></label>
-          <label class="pill"><input type="checkbox" name="taticaTreinar" value="Padrões de jogo"><span>Padrões de jogo</span></label>
-          <label class="pill"><input type="checkbox" name="taticaTreinar" value="Saque"><span>Saque</span></label>
-          <label class="pill"><input type="checkbox" name="taticaTreinar" value="Devolução"><span>Devolução</span></label>
-          <label class="pill"><input type="checkbox" name="taticaTreinar" value="Decisão"><span>Decisão</span></label>
-          <label class="pill"><input type="checkbox" name="taticaTreinar" value="Diferentes estilos"><span>Diferentes estilos</span></label>
-          <label class="pill"><input type="checkbox" name="taticaTreinar" value="Pressão"><span>Pressão</span></label>
-          <label class="pill"><input type="checkbox" name="taticaTreinar" value="Estratégia de partida"><span>Estratégia de partida</span></label>
+        <div class="passo" data-step="8" data-tema="Seus objetivos">
+          <p class="passo-pergunta">Qual é seu principal objetivo com o tênis?</p>
+          <div class="pills" data-name="objetivoPrincipal" data-type="radio">
+            <label class="pill"><input type="radio" name="objetivoPrincipal" value="Aprender"><span>Aprender</span></label>
+            <label class="pill"><input type="radio" name="objetivoPrincipal" value="Evoluir tecnicamente"><span>Evoluir tecnicamente</span></label>
+            <label class="pill"><input type="radio" name="objetivoPrincipal" value="Melhorar tática"><span>Melhorar tática</span></label>
+            <label class="pill"><input type="radio" name="objetivoPrincipal" value="Competir"><span>Competir</span></label>
+            <label class="pill"><input type="radio" name="objetivoPrincipal" value="Jogar melhor"><span>Jogar melhor</span></label>
+            <label class="pill"><input type="radio" name="objetivoPrincipal" value="Condicionamento"><span>Condicionamento</span></label>
+            <label class="pill"><input type="radio" name="objetivoPrincipal" value="Diversão"><span>Diversão</span></label>
+            <label class="pill"><input type="radio" name="objetivoPrincipal" value="Socializar"><span>Socializar</span></label>
+            <label class="pill"><input type="radio" name="objetivoPrincipal" value="Alta intensidade"><span>Alta intensidade</span></label>
+          </div>
+          <input type="text" class="outro" name="objetivoPrincipalOutro" placeholder="Outro (opcional)">
         </div>
-        <input type="text" class="outro" name="taticaTreinarOutro" placeholder="Outro (opcional)">
-      </div>
 
-      <div class="pergunta">
-        <p>Gostaria de mais momentos de jogo/sets?</p>
-        <div class="pills" data-name="maisJogoSets" data-type="radio">
-          <label class="pill"><input type="radio" name="maisJogoSets" value="Sim, bastante"><span>Sim, bastante</span></label>
-          <label class="pill"><input type="radio" name="maisJogoSets" value="Sim, um pouco mais"><span>Sim, um pouco mais</span></label>
-          <label class="pill"><input type="radio" name="maisJogoSets" value="Está adequado"><span>Está adequado</span></label>
-          <label class="pill"><input type="radio" name="maisJogoSets" value="Prefiro mais exercícios técnicos"><span>Prefiro mais exercícios técnicos</span></label>
-          <label class="pill"><input type="radio" name="maisJogoSets" value="Não tenho preferência"><span>Não tenho preferência</span></label>
+        <div class="passo" data-step="9" data-tema="Seus objetivos">
+          <label class="passo-pergunta" for="objetivos3">Quais são os 3 objetivos mais importantes para você?</label>
+          <textarea id="objetivos3" name="objetivos3" rows="4"></textarea>
         </div>
-      </div>
-    </fieldset>
 
-    <fieldset class="passo" data-step="5">
-      <legend><span class="num">5</span> Expectativas e evolução</legend>
-
-      <div class="pergunta">
-        <label for="expectativaInicial">Quando começou as aulas, o que esperava alcançar?</label>
-        <textarea id="expectativaInicial" name="expectativaInicial" rows="3"></textarea>
-      </div>
-
-      <div class="pergunta">
-        <p>Hoje, suas expectativas estão sendo atendidas?</p>
-        <div class="pills" data-name="expectativasAtendidas" data-type="radio">
-          <label class="pill"><input type="radio" name="expectativasAtendidas" value="Sim, totalmente"><span>Sim, totalmente</span></label>
-          <label class="pill"><input type="radio" name="expectativasAtendidas" value="Em grande parte"><span>Em grande parte</span></label>
-          <label class="pill"><input type="radio" name="expectativasAtendidas" value="Parcialmente"><span>Parcialmente</span></label>
-          <label class="pill"><input type="radio" name="expectativasAtendidas" value="Pouco"><span>Pouco</span></label>
-          <label class="pill"><input type="radio" name="expectativasAtendidas" value="Não"><span>Não</span></label>
+        <div class="passo" data-step="10" data-tema="Seus objetivos">
+          <p class="passo-pergunta">Qual é hoje o principal ponto que você precisa melhorar? <span class="dica">(pode marcar mais de um)</span></p>
+          <div class="pills" data-name="pontoMelhorar" data-type="checkbox">
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Forehand"><span>Forehand</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Backhand"><span>Backhand</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Saque"><span>Saque</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Devolução"><span>Devolução</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Voleio"><span>Voleio</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Smash"><span>Smash</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Slice"><span>Slice</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Movimentação"><span>Movimentação</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Posicionamento"><span>Posicionamento</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Consistência"><span>Consistência</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Potência"><span>Potência</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Controle"><span>Controle</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Tática"><span>Tática</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Tomada de decisão"><span>Tomada de decisão</span></label>
+            <label class="pill"><input type="checkbox" name="pontoMelhorar" value="Confiança"><span>Confiança</span></label>
+          </div>
+          <input type="text" class="outro" name="pontoMelhorarOutro" placeholder="Outro (opcional)">
         </div>
-      </div>
 
-      <div class="pergunta">
-        <label for="faltaAlgo">Existe algo que esperava encontrar nas aulas e sente que está faltando?</label>
-        <textarea id="faltaAlgo" name="faltaAlgo" rows="3"></textarea>
-      </div>
-
-      <div class="pergunta">
-        <label for="naoConsegueFazer">O que gostaria de conseguir fazer no tênis que ainda não consegue?</label>
-        <textarea id="naoConsegueFazer" name="naoConsegueFazer" rows="3"></textarea>
-      </div>
-    </fieldset>
-
-    <fieldset class="passo" data-step="6">
-      <legend><span class="num">6</span> Formação das turmas</legend>
-
-      <div class="pergunta">
-        <p>Qual formato seria melhor para você?</p>
-        <div class="pills" data-name="formatoTurma" data-type="radio">
-          <label class="pill"><input type="radio" name="formatoTurma" value="Alunos de nível parecido"><span>Alunos de nível parecido</span></label>
-          <label class="pill"><input type="radio" name="formatoTurma" value="Alunos com objetivos parecidos"><span>Alunos com objetivos parecidos</span></label>
-          <label class="pill"><input type="radio" name="formatoTurma" value="Nível e objetivos semelhantes"><span>Nível e objetivos semelhantes</span></label>
-          <label class="pill"><input type="radio" name="formatoTurma" value="Não tenho preferência"><span>Não tenho preferência</span></label>
+        <div class="passo" data-step="11" data-tema="O que você gostaria de treinar?">
+          <p class="passo-pergunta">Qual fundamento gostaria que fosse mais trabalhado? <span class="dica">(pode marcar mais de um)</span></p>
+          <div class="pills" data-name="fundamentoTreinar" data-type="checkbox">
+            <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Forehand"><span>Forehand</span></label>
+            <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Backhand"><span>Backhand</span></label>
+            <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Saque"><span>Saque</span></label>
+            <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Devolução"><span>Devolução</span></label>
+            <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Voleio"><span>Voleio</span></label>
+            <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Smash"><span>Smash</span></label>
+            <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Slice"><span>Slice</span></label>
+            <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Drop shot"><span>Drop shot</span></label>
+            <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Approach"><span>Approach</span></label>
+            <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Definição"><span>Definição</span></label>
+            <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Consistência"><span>Consistência</span></label>
+            <label class="pill"><input type="checkbox" name="fundamentoTreinar" value="Movimentação"><span>Movimentação</span></label>
+          </div>
+          <input type="text" class="outro" name="fundamentoTreinarOutro" placeholder="Outro (opcional)">
         </div>
+
+        <div class="passo" data-step="12" data-tema="O que você gostaria de treinar?">
+          <p class="passo-pergunta">E na parte tática? <span class="dica">(pode marcar mais de um)</span></p>
+          <div class="pills" data-name="taticaTreinar" data-type="checkbox">
+            <label class="pill"><input type="checkbox" name="taticaTreinar" value="Construção"><span>Construção</span></label>
+            <label class="pill"><input type="checkbox" name="taticaTreinar" value="Ataque"><span>Ataque</span></label>
+            <label class="pill"><input type="checkbox" name="taticaTreinar" value="Defesa"><span>Defesa</span></label>
+            <label class="pill"><input type="checkbox" name="taticaTreinar" value="Rede"><span>Rede</span></label>
+            <label class="pill"><input type="checkbox" name="taticaTreinar" value="Padrões de jogo"><span>Padrões de jogo</span></label>
+            <label class="pill"><input type="checkbox" name="taticaTreinar" value="Saque"><span>Saque</span></label>
+            <label class="pill"><input type="checkbox" name="taticaTreinar" value="Devolução"><span>Devolução</span></label>
+            <label class="pill"><input type="checkbox" name="taticaTreinar" value="Decisão"><span>Decisão</span></label>
+            <label class="pill"><input type="checkbox" name="taticaTreinar" value="Diferentes estilos"><span>Diferentes estilos</span></label>
+            <label class="pill"><input type="checkbox" name="taticaTreinar" value="Pressão"><span>Pressão</span></label>
+            <label class="pill"><input type="checkbox" name="taticaTreinar" value="Estratégia de partida"><span>Estratégia de partida</span></label>
+          </div>
+          <input type="text" class="outro" name="taticaTreinarOutro" placeholder="Outro (opcional)">
+        </div>
+
+        <div class="passo" data-step="13" data-tema="O que você gostaria de treinar?">
+          <p class="passo-pergunta">Gostaria de mais momentos de jogo/sets?</p>
+          <div class="pills" data-name="maisJogoSets" data-type="radio">
+            <label class="pill"><input type="radio" name="maisJogoSets" value="Sim, bastante"><span>Sim, bastante</span></label>
+            <label class="pill"><input type="radio" name="maisJogoSets" value="Sim, um pouco mais"><span>Sim, um pouco mais</span></label>
+            <label class="pill"><input type="radio" name="maisJogoSets" value="Está adequado"><span>Está adequado</span></label>
+            <label class="pill"><input type="radio" name="maisJogoSets" value="Prefiro mais exercícios técnicos"><span>Prefiro mais exercícios técnicos</span></label>
+            <label class="pill"><input type="radio" name="maisJogoSets" value="Não tenho preferência"><span>Não tenho preferência</span></label>
+          </div>
+        </div>
+
+        <div class="passo" data-step="14" data-tema="Expectativas e evolução">
+          <label class="passo-pergunta" for="expectativaInicial">Quando começou as aulas, o que esperava alcançar?</label>
+          <textarea id="expectativaInicial" name="expectativaInicial" rows="4"></textarea>
+        </div>
+
+        <div class="passo" data-step="15" data-tema="Expectativas e evolução">
+          <p class="passo-pergunta">Hoje, suas expectativas estão sendo atendidas?</p>
+          <div class="pills" data-name="expectativasAtendidas" data-type="radio">
+            <label class="pill"><input type="radio" name="expectativasAtendidas" value="Sim, totalmente"><span>Sim, totalmente</span></label>
+            <label class="pill"><input type="radio" name="expectativasAtendidas" value="Em grande parte"><span>Em grande parte</span></label>
+            <label class="pill"><input type="radio" name="expectativasAtendidas" value="Parcialmente"><span>Parcialmente</span></label>
+            <label class="pill"><input type="radio" name="expectativasAtendidas" value="Pouco"><span>Pouco</span></label>
+            <label class="pill"><input type="radio" name="expectativasAtendidas" value="Não"><span>Não</span></label>
+          </div>
+        </div>
+
+        <div class="passo" data-step="16" data-tema="Expectativas e evolução">
+          <label class="passo-pergunta" for="faltaAlgo">Existe algo que esperava encontrar nas aulas e sente que está faltando?</label>
+          <textarea id="faltaAlgo" name="faltaAlgo" rows="4"></textarea>
+        </div>
+
+        <div class="passo" data-step="17" data-tema="Expectativas e evolução">
+          <label class="passo-pergunta" for="naoConsegueFazer">O que gostaria de conseguir fazer no tênis que ainda não consegue?</label>
+          <textarea id="naoConsegueFazer" name="naoConsegueFazer" rows="4"></textarea>
+        </div>
+
+        <div class="passo" data-step="18" data-tema="Formação das turmas">
+          <p class="passo-pergunta">Qual formato seria melhor para você?</p>
+          <div class="pills" data-name="formatoTurma" data-type="radio">
+            <label class="pill"><input type="radio" name="formatoTurma" value="Alunos de nível parecido"><span>Alunos de nível parecido</span></label>
+            <label class="pill"><input type="radio" name="formatoTurma" value="Alunos com objetivos parecidos"><span>Alunos com objetivos parecidos</span></label>
+            <label class="pill"><input type="radio" name="formatoTurma" value="Nível e objetivos semelhantes"><span>Nível e objetivos semelhantes</span></label>
+            <label class="pill"><input type="radio" name="formatoTurma" value="Não tenho preferência"><span>Não tenho preferência</span></label>
+          </div>
+        </div>
+
+        <div class="passo" data-step="19" data-tema="Formação das turmas">
+          <label class="passo-pergunta" for="mudarAula">Se pudesse mudar ou acrescentar uma coisa nas aulas, o que seria?</label>
+          <textarea id="mudarAula" name="mudarAula" rows="4"></textarea>
+        </div>
+
+        <div class="passo" data-step="20" data-tema="Formação das turmas">
+          <label class="passo-pergunta" for="contribuirMais">Existe algo que eu poderia fazer diferente para contribuir ainda mais para sua evolução?</label>
+          <textarea id="contribuirMais" name="contribuirMais" rows="4"></textarea>
+        </div>
+
+        <p id="mensagem" role="status"></p>
       </div>
 
-      <div class="pergunta">
-        <label for="mudarAula">Se pudesse mudar ou acrescentar uma coisa nas aulas, o que seria?</label>
-        <textarea id="mudarAula" name="mudarAula" rows="3"></textarea>
+      <div class="navegacao">
+        <button type="button" id="btnVoltar" class="btn-secundario" hidden>Voltar</button>
+        <button type="button" id="btnAvancar" class="btn-primario">Próximo</button>
+        <button type="submit" id="btnEnviar" class="btn-primario" hidden>Enviar respostas</button>
       </div>
+    </form>
 
-      <div class="pergunta">
-        <label for="contribuirMais">Existe algo que eu poderia fazer diferente para contribuir ainda mais para sua evolução?</label>
-        <textarea id="contribuirMais" name="contribuirMais" rows="3"></textarea>
-      </div>
-    </fieldset>
-
-    <p id="mensagem" role="status"></p>
-
-    <div class="navegacao">
-      <button type="button" id="btnVoltar" class="btn-secundario">Voltar</button>
-      <button type="button" id="btnAvancar" class="btn-primario">Próximo</button>
-      <button type="submit" id="btnEnviar" class="btn-primario" hidden>Enviar respostas</button>
-    </div>
-  </form>
+  </div>
 
   <section class="sucesso" id="sucesso" hidden>
+    <video class="video-agradecimento" src="/VIDEO_AGRADECIMENTO.mp4" controls autoplay muted playsinline></video>
     <img src="/logo.png" alt="Mr. Tennis" class="logo-sucesso">
     <h2>Obrigado pela confiança e pela parceria!</h2>
     <p>Confia no processo.</p>
   </section>
-</main>
-
-<footer class="rodape">
-  <p>Mr. Tennis · Pesquisa de satisfação</p>
-</footer>
-
 </div>
 
 <script src="/app.js"></script>
