@@ -80,7 +80,7 @@
   var TOTAL = passos.length;
   var atual = 1;
 
-  var CHECKBOX_GROUPS = ['pontoMelhorar', 'fundamentoTreinar', 'taticaTreinar'];
+  var CHECKBOX_GROUPS = ['objetivoPrincipal', 'pontoMelhorar', 'fundamentoTreinar', 'taticaTreinar'];
   var JA_RESPONDEU = 'Este e-mail já respondeu a pesquisa. Obrigado!';
 
   function limparMensagemPortao() {
