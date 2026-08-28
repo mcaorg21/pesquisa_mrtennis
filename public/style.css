@@ -166,18 +166,14 @@ a { color: var(--accent); }
   display: none;
 }
 
-.video-intro {
+.video-intro,
+#videoIntroYoutube {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  border: 0;
   background: var(--bg);
-}
-
-@media (max-width: 640px) {
-  .video-intro {
-    object-fit: contain;
-  }
 }
 
 .logo-video {

@@ -2,7 +2,6 @@
   var portao = document.getElementById('portao');
   var faseVideo = document.getElementById('faseVideo');
   var faseForm = document.getElementById('faseForm');
-  var videoIntro = document.getElementById('videoIntro');
   var btnSom = document.getElementById('btnSom');
   var btnPular = document.getElementById('btnPular');
   var formPortao = document.getElementById('formPortao');
@@ -10,7 +9,9 @@
   var btnComecar = document.getElementById('btnComecar');
   var conteudoPesquisa = document.getElementById('conteudoPesquisa');
 
+  var YOUTUBE_ID_INTRO = 'p-ov9_lpgSo';
   var trocandoFase = false;
+  var playerYoutube = null;
 
   function irParaFaseForm() {
     if (trocandoFase || faseForm.hidden === false) return;
@@ -19,7 +20,7 @@
     faseVideo.style.opacity = '0';
     setTimeout(function () {
       faseVideo.hidden = true;
-      videoIntro.pause();
+      if (playerYoutube && playerYoutube.pauseVideo) playerYoutube.pauseVideo();
 
       faseForm.hidden = false;
       faseForm.style.opacity = '0';
@@ -31,15 +32,38 @@
     }, 500);
   }
 
-  videoIntro.addEventListener('ended', irParaFaseForm);
   btnPular.addEventListener('click', irParaFaseForm);
 
   btnSom.addEventListener('click', function () {
-    videoIntro.muted = false;
+    if (playerYoutube && playerYoutube.unMute) {
+      playerYoutube.unMute();
+      playerYoutube.setVolume(100);
+    }
     btnSom.hidden = true;
   });
 
-  videoIntro.play().catch(function () {});
+  window.onYouTubeIframeAPIReady = function () {
+    playerYoutube = new YT.Player('videoIntroYoutube', {
+      videoId: YOUTUBE_ID_INTRO,
+      playerVars: {
+        autoplay: 1,
+        mute: 1,
+        controls: 0,
+        playsinline: 1,
+        rel: 0,
+        modestbranding: 1,
+        disablekb: 1,
+        fs: 0,
+        iv_load_policy: 3,
+      },
+      events: {
+        onReady: function (evento) { evento.target.playVideo(); },
+        onStateChange: function (evento) {
+          if (evento.data === YT.PlayerState.ENDED) irParaFaseForm();
+        },
+      },
+    });
+  };
 
   var telaPesquisa = document.querySelector('.tela-pesquisa');
   var form = document.getElementById('pesquisa');
