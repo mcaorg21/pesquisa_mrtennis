@@ -191,7 +191,7 @@ app.get('/admin', requireAdmin, async (req, res) => {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   :root { color-scheme: dark; }
-  body { background:#0b0b0c; color:#f2f2f2; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin:0; padding:2rem; }
+  body { background:#020816; color:#f2f2f2; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin:0; padding:2rem; }
   h1 { margin:0 0 .25rem; }
   .sub { color:#9a9a9a; margin:0 0 1.5rem; }
   .barra { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-bottom:2rem; }

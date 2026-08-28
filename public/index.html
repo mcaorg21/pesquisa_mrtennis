@@ -12,29 +12,37 @@
 
 <div id="portao" class="portao">
   <div class="portao-conteudo">
-    <img src="/logo.png" alt="Mr. Tennis" class="logo-portao">
 
-    <video class="video-intro" src="/video_intro_mrtennis.mp4" poster="/logo.png" controls playsinline></video>
+    <div id="faseVideo" class="fase-video">
+      <img src="/logo.png" alt="Mr. Tennis" class="logo-portao">
+      <video id="videoIntro" class="video-intro" src="/video_intro_mrtennis.mp4" poster="/logo.png" autoplay muted playsinline controls></video>
+      <button type="button" id="btnPular" class="btn-pular">Pular introdução →</button>
+    </div>
 
-    <p class="kicker">Pesquisa de satisfação</p>
-    <h1>Antes de começar</h1>
-    <p class="lead">
-      Digite seu nome e e-mail para acessar a pesquisa. O e-mail identifica sua resposta e evita
-      que a pesquisa seja respondida duas vezes pela mesma pessoa.
-    </p>
+    <div id="faseForm" class="fase-form" hidden>
+      <img src="/logo.png" alt="Mr. Tennis" class="logo-portao">
 
-    <form id="formPortao" class="form-portao" novalidate>
-      <div class="campo-nome">
-        <label for="nomePortao">Seu nome *</label>
-        <input type="text" id="nomePortao" name="nomePortao" required autocomplete="name" placeholder="Nome completo">
-      </div>
-      <div class="campo-nome">
-        <label for="emailPortao">Seu e-mail *</label>
-        <input type="email" id="emailPortao" name="emailPortao" required autocomplete="email" placeholder="voce@email.com">
-      </div>
-      <button type="submit" class="btn-primario" id="btnComecar">Começar</button>
-      <p id="mensagemPortao" role="status"></p>
-    </form>
+      <p class="kicker">Pesquisa de satisfação</p>
+      <h1>Antes de começar</h1>
+      <p class="lead">
+        Digite seu nome e e-mail para acessar a pesquisa. O e-mail identifica sua resposta e evita
+        que a pesquisa seja respondida duas vezes pela mesma pessoa.
+      </p>
+
+      <form id="formPortao" class="form-portao" novalidate>
+        <div class="campo-nome">
+          <label for="nomePortao">Seu nome *</label>
+          <input type="text" id="nomePortao" name="nomePortao" required autocomplete="name" placeholder="Nome completo">
+        </div>
+        <div class="campo-nome">
+          <label for="emailPortao">Seu e-mail *</label>
+          <input type="email" id="emailPortao" name="emailPortao" required autocomplete="email" placeholder="voce@email.com">
+        </div>
+        <button type="submit" class="btn-primario" id="btnComecar">Começar</button>
+        <p id="mensagemPortao" role="status"></p>
+      </form>
+    </div>
+
   </div>
 </div>
 

@@ -1,9 +1,41 @@
 (function () {
   var portao = document.getElementById('portao');
+  var faseVideo = document.getElementById('faseVideo');
+  var faseForm = document.getElementById('faseForm');
+  var videoIntro = document.getElementById('videoIntro');
+  var btnPular = document.getElementById('btnPular');
   var formPortao = document.getElementById('formPortao');
   var mensagemPortao = document.getElementById('mensagemPortao');
   var btnComecar = document.getElementById('btnComecar');
   var conteudoPesquisa = document.getElementById('conteudoPesquisa');
+
+  var trocandoFase = false;
+
+  function irParaFaseForm() {
+    if (trocandoFase || faseForm.hidden === false) return;
+    trocandoFase = true;
+
+    faseVideo.style.opacity = '0';
+    setTimeout(function () {
+      faseVideo.hidden = true;
+      videoIntro.pause();
+
+      faseForm.hidden = false;
+      faseForm.style.opacity = '0';
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          faseForm.style.opacity = '1';
+        });
+      });
+    }, 500);
+  }
+
+  videoIntro.addEventListener('ended', irParaFaseForm);
+  btnPular.addEventListener('click', irParaFaseForm);
+
+  videoIntro.play().catch(function () {
+    // autoplay pode ser bloqueado pelo navegador; o botao "Pular introducao" cobre esse caso.
+  });
 
   var form = document.getElementById('pesquisa');
   var mensagem = document.getElementById('mensagem');
