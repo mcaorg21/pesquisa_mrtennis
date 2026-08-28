@@ -40,17 +40,14 @@
   btnPular.addEventListener('click', irParaFaseForm);
 
   btnPlay.addEventListener('click', function () {
-    videoIntro.muted = false;
-    videoIntro.play().catch(function () {
-      videoIntro.muted = true;
-      videoIntro.play().catch(function () {});
-    });
+    videoIntro.play().catch(function () {});
   });
 
   videoIntro.play()
     .then(esconderBotaoPlay)
     .catch(function () {
-      // autoplay bloqueado pelo navegador: o botao de play fica visivel para o clique iniciar.
+      // autoplay com som bloqueado pelo navegador: o botao de play fica visivel
+      // para o clique iniciar a reproducao (com som, pois e um gesto do usuario).
     });
 
   var telaPesquisa = document.querySelector('.tela-pesquisa');
@@ -136,6 +133,32 @@
     mensagem.className = 'erro';
   }
 
+  function passoValido(passo) {
+    var radios = passo.querySelectorAll('input[type="radio"]');
+    if (radios.length) {
+      return Array.prototype.some.call(radios, function (r) { return r.checked; });
+    }
+
+    var checkboxes = passo.querySelectorAll('input[type="checkbox"]');
+    if (checkboxes.length) {
+      return Array.prototype.some.call(checkboxes, function (c) { return c.checked; });
+    }
+
+    var textarea = passo.querySelector('textarea');
+    if (textarea) {
+      return textarea.value.trim().length > 0;
+    }
+
+    return true;
+  }
+
+  function primeiroPassoInvalido() {
+    for (var i = 0; i < passos.length; i++) {
+      if (!passoValido(passos[i])) return i;
+    }
+    return -1;
+  }
+
   function irPara(numero) {
     atual = numero;
     var passoAtual = passos[atual - 1];
@@ -156,6 +179,10 @@
   }
 
   btnAvancar.addEventListener('click', function () {
+    if (!passoValido(passos[atual - 1])) {
+      mostrarErro('Por favor, responda antes de continuar.');
+      return;
+    }
     if (atual < TOTAL) irPara(atual + 1);
   });
 
@@ -182,6 +209,13 @@
   form.addEventListener('submit', function (evento) {
     evento.preventDefault();
     limparMensagem();
+
+    var indiceInvalido = primeiroPassoInvalido();
+    if (indiceInvalido !== -1) {
+      irPara(indiceInvalido + 1);
+      mostrarErro('Por favor, responda antes de continuar.');
+      return;
+    }
 
     btnEnviar.disabled = true;
     btnEnviar.textContent = 'Enviando...';

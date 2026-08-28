@@ -323,6 +323,11 @@ a { color: var(--accent); }
   margin: 0 0 var(--space-1);
 }
 
+.passo-pergunta::after {
+  content: " *";
+  color: var(--accent);
+}
+
 .campo-nome {
   background: var(--surface-2);
   border: 1px solid var(--border);
