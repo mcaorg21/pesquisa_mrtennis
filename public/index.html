@@ -29,15 +29,24 @@
     </p>
   </section>
 
+  <nav class="stepper" id="stepper" aria-label="Progresso da pesquisa">
+    <button type="button" class="passo-nav" data-goto="1"><span class="bolha">1</span><span class="rotulo-passo">Sobre você</span></button>
+    <button type="button" class="passo-nav" data-goto="2"><span class="bolha">2</span><span class="rotulo-passo">Experiência</span></button>
+    <button type="button" class="passo-nav" data-goto="3"><span class="bolha">3</span><span class="rotulo-passo">Objetivos</span></button>
+    <button type="button" class="passo-nav" data-goto="4"><span class="bolha">4</span><span class="rotulo-passo">Treino</span></button>
+    <button type="button" class="passo-nav" data-goto="5"><span class="bolha">5</span><span class="rotulo-passo">Expectativas</span></button>
+    <button type="button" class="passo-nav" data-goto="6"><span class="bolha">6</span><span class="rotulo-passo">Turmas</span></button>
+  </nav>
+
   <form id="pesquisa">
 
-    <div class="campo-nome">
-      <label for="nome">Seu nome *</label>
-      <input type="text" id="nome" name="nome" required autocomplete="name" placeholder="Nome completo">
-    </div>
-
-    <fieldset>
+    <fieldset class="passo" data-step="1">
       <legend><span class="num">1</span> Sobre você</legend>
+
+      <div class="campo-nome">
+        <label for="nome">Seu nome *</label>
+        <input type="text" id="nome" name="nome" required autocomplete="name" placeholder="Nome completo">
+      </div>
 
       <div class="pergunta">
         <p>Há quanto tempo você faz aulas comigo?</p>
@@ -62,7 +71,7 @@
       </div>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="passo" data-step="2">
       <legend><span class="num">2</span> Sua experiência nas aulas</legend>
 
       <div class="pergunta">
@@ -123,7 +132,7 @@
       </div>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="passo" data-step="3">
       <legend><span class="num">3</span> Seus objetivos</legend>
 
       <div class="pergunta">
@@ -170,7 +179,7 @@
       </div>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="passo" data-step="4">
       <legend><span class="num">4</span> O que você gostaria de treinar?</legend>
 
       <div class="pergunta">
@@ -222,7 +231,7 @@
       </div>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="passo" data-step="5">
       <legend><span class="num">5</span> Expectativas e evolução</legend>
 
       <div class="pergunta">
@@ -252,7 +261,7 @@
       </div>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="passo" data-step="6">
       <legend><span class="num">6</span> Formação das turmas</legend>
 
       <div class="pergunta">
@@ -276,9 +285,12 @@
       </div>
     </fieldset>
 
-    <div class="envio">
-      <button type="submit" id="btnEnviar">Enviar respostas</button>
-      <p id="mensagem" role="status"></p>
+    <p id="mensagem" role="status"></p>
+
+    <div class="navegacao">
+      <button type="button" id="btnVoltar" class="btn-secundario">Voltar</button>
+      <button type="button" id="btnAvancar" class="btn-primario">Próximo</button>
+      <button type="submit" id="btnEnviar" class="btn-primario" hidden>Enviar respostas</button>
     </div>
   </form>
 
