@@ -3,6 +3,7 @@
   var faseVideo = document.getElementById('faseVideo');
   var faseForm = document.getElementById('faseForm');
   var videoIntro = document.getElementById('videoIntro');
+  var btnPlay = document.getElementById('btnPlay');
   var btnPular = document.getElementById('btnPular');
   var formPortao = document.getElementById('formPortao');
   var mensagemPortao = document.getElementById('mensagemPortao');
@@ -30,12 +31,27 @@
     }, 500);
   }
 
+  function esconderBotaoPlay() {
+    btnPlay.hidden = true;
+  }
+
+  videoIntro.addEventListener('playing', esconderBotaoPlay);
   videoIntro.addEventListener('ended', irParaFaseForm);
   btnPular.addEventListener('click', irParaFaseForm);
 
-  videoIntro.play().catch(function () {
-    // autoplay pode ser bloqueado pelo navegador; o botao "Pular introducao" cobre esse caso.
+  btnPlay.addEventListener('click', function () {
+    videoIntro.muted = false;
+    videoIntro.play().catch(function () {
+      videoIntro.muted = true;
+      videoIntro.play().catch(function () {});
+    });
   });
+
+  videoIntro.play()
+    .then(esconderBotaoPlay)
+    .catch(function () {
+      // autoplay bloqueado pelo navegador: o botao de play fica visivel para o clique iniciar.
+    });
 
   var form = document.getElementById('pesquisa');
   var mensagem = document.getElementById('mensagem');
