@@ -14,12 +14,12 @@
   <div class="portao-conteudo">
 
     <div id="faseVideo" class="fase-video">
-      <video id="videoIntro" class="video-intro" src="/video_intro_mrtennis.mp4" autoplay playsinline preload="auto"></video>
+      <video id="videoIntro" class="video-intro" src="/video_intro_mrtennis.mp4" autoplay muted playsinline preload="auto"></video>
       <img src="/logo.png" alt="Mr. Tennis" class="logo-video">
-      <button type="button" id="btnPlay" class="btn-play" aria-label="Assistir vídeo">
-        <span class="triangulo"></span>
-      </button>
-      <button type="button" id="btnPular" class="btn-pular">Pular introdução →</button>
+      <div class="controles-video">
+        <button type="button" id="btnSom" class="btn-som">Ativar som</button>
+        <button type="button" id="btnPular" class="btn-pular">Pular introdução →</button>
+      </div>
     </div>
 
     <div id="faseForm" class="fase-form" hidden>

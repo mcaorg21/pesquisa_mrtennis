@@ -3,7 +3,7 @@
   var faseVideo = document.getElementById('faseVideo');
   var faseForm = document.getElementById('faseForm');
   var videoIntro = document.getElementById('videoIntro');
-  var btnPlay = document.getElementById('btnPlay');
+  var btnSom = document.getElementById('btnSom');
   var btnPular = document.getElementById('btnPular');
   var formPortao = document.getElementById('formPortao');
   var mensagemPortao = document.getElementById('mensagemPortao');
@@ -31,24 +31,15 @@
     }, 500);
   }
 
-  function esconderBotaoPlay() {
-    btnPlay.hidden = true;
-  }
-
-  videoIntro.addEventListener('playing', esconderBotaoPlay);
   videoIntro.addEventListener('ended', irParaFaseForm);
   btnPular.addEventListener('click', irParaFaseForm);
 
-  btnPlay.addEventListener('click', function () {
-    videoIntro.play().catch(function () {});
+  btnSom.addEventListener('click', function () {
+    videoIntro.muted = false;
+    btnSom.hidden = true;
   });
 
-  videoIntro.play()
-    .then(esconderBotaoPlay)
-    .catch(function () {
-      // autoplay com som bloqueado pelo navegador: o botao de play fica visivel
-      // para o clique iniciar a reproducao (com som, pois e um gesto do usuario).
-    });
+  videoIntro.play().catch(function () {});
 
   var telaPesquisa = document.querySelector('.tela-pesquisa');
   var form = document.getElementById('pesquisa');
@@ -217,6 +208,14 @@
     telaPesquisa.hidden = true;
     carregando.hidden = false;
 
+    var DURACAO_MINIMA_MS = 4000;
+    var inicioEnvio = Date.now();
+
+    function aposDuracaoMinima(callback) {
+      var espera = DURACAO_MINIMA_MS - (Date.now() - inicioEnvio);
+      setTimeout(callback, espera > 0 ? espera : 0);
+    }
+
     fetch('/api/respostas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -227,14 +226,18 @@
         return resp.json();
       })
       .then(function () {
-        carregando.hidden = true;
-        sucesso.hidden = false;
+        aposDuracaoMinima(function () {
+          carregando.hidden = true;
+          sucesso.hidden = false;
+        });
       })
       .catch(function (err) {
-        carregando.hidden = true;
-        telaPesquisa.hidden = false;
-        mostrarErro(err.message || 'Erro ao enviar. Tente novamente.');
-        btnEnviar.disabled = false;
+        aposDuracaoMinima(function () {
+          carregando.hidden = true;
+          telaPesquisa.hidden = false;
+          mostrarErro(err.message || 'Erro ao enviar. Tente novamente.');
+          btnEnviar.disabled = false;
+        });
       });
   });
 })();
