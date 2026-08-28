@@ -169,6 +169,12 @@ a { color: var(--accent); }
   display: block;
 }
 
+@media (max-width: 640px) {
+  .video-intro {
+    object-fit: contain;
+  }
+}
+
 .logo-video {
   position: absolute;
   top: var(--space-5);
