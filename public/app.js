@@ -144,11 +144,6 @@
       return Array.prototype.some.call(checkboxes, function (c) { return c.checked; });
     }
 
-    var textarea = passo.querySelector('textarea');
-    if (textarea) {
-      return textarea.value.trim().length > 0;
-    }
-
     return true;
   }
 
