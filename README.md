@@ -2,7 +2,7 @@
 
 Formulário de pesquisa de satisfação e objetivos dos alunos, com respostas salvas em PostgreSQL e um painel de leitura/exportação em `/admin`.
 
-**Ao vivo:** https://pesquisa-mrtennis-production-751e.up.railway.app
+**Ao vivo:** https://pesquisa-mrtennis.up.railway.app
 
 O acesso ao formulário é protegido por um portão de e-mail: o aluno informa nome e e-mail antes de ver as perguntas, e o e-mail é a chave única no banco — reenvios com o mesmo e-mail são bloqueados.
 
