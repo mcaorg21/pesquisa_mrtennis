@@ -10,6 +10,36 @@
 </head>
 <body>
 
+<div id="portao" class="portao">
+  <div class="portao-conteudo">
+    <img src="/logo.png" alt="Mr. Tennis" class="logo-portao">
+
+    <video class="video-intro" src="/video_intro_mrtennis.mp4" poster="/logo.png" controls playsinline></video>
+
+    <p class="kicker">Pesquisa de satisfação</p>
+    <h1>Antes de começar</h1>
+    <p class="lead">
+      Digite seu nome e e-mail para acessar a pesquisa. O e-mail identifica sua resposta e evita
+      que a pesquisa seja respondida duas vezes pela mesma pessoa.
+    </p>
+
+    <form id="formPortao" class="form-portao" novalidate>
+      <div class="campo-nome">
+        <label for="nomePortao">Seu nome *</label>
+        <input type="text" id="nomePortao" name="nomePortao" required autocomplete="name" placeholder="Nome completo">
+      </div>
+      <div class="campo-nome">
+        <label for="emailPortao">Seu e-mail *</label>
+        <input type="email" id="emailPortao" name="emailPortao" required autocomplete="email" placeholder="voce@email.com">
+      </div>
+      <button type="submit" class="btn-primario" id="btnComecar">Começar</button>
+      <p id="mensagemPortao" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<div id="conteudoPesquisa" hidden>
+
 <header class="topo">
   <img src="/logo.png" alt="Mr. Tennis" class="logo">
 </header>
@@ -39,14 +69,11 @@
   </nav>
 
   <form id="pesquisa">
+    <input type="hidden" name="nome" id="nome">
+    <input type="hidden" name="email" id="email">
 
     <fieldset class="passo" data-step="1">
       <legend><span class="num">1</span> Sobre você</legend>
-
-      <div class="campo-nome">
-        <label for="nome">Seu nome *</label>
-        <input type="text" id="nome" name="nome" required autocomplete="name" placeholder="Nome completo">
-      </div>
 
       <div class="pergunta">
         <p>Há quanto tempo você faz aulas comigo?</p>
@@ -304,6 +331,8 @@
 <footer class="rodape">
   <p>Mr. Tennis · Pesquisa de satisfação</p>
 </footer>
+
+</div>
 
 <script src="/app.js"></script>
 </body>

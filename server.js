@@ -45,12 +45,43 @@ function csvEscape(value) {
   return str;
 }
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const JA_RESPONDEU = 'Este e-mail já respondeu a pesquisa.';
+
+function normalizarEmail(valor) {
+  return (valor || '').trim().toLowerCase();
+}
+
+app.get('/api/verificar-email', async (req, res) => {
+  const email = normalizarEmail(req.query.email);
+
+  if (!EMAIL_REGEX.test(email)) {
+    return res.status(400).json({ error: 'E-mail inválido.' });
+  }
+
+  try {
+    const { rows } = await pool.query(
+      'SELECT 1 FROM respostas WHERE LOWER(email) = $1',
+      [email]
+    );
+    res.json({ jaRespondeu: rows.length > 0 });
+  } catch (err) {
+    console.error('Erro ao verificar e-mail:', err);
+    res.status(500).json({ error: 'Erro ao verificar e-mail. Tente novamente.' });
+  }
+});
+
 app.post('/api/respostas', async (req, res) => {
   const body = req.body || {};
   const nome = (body.nome || '').trim();
+  const email = normalizarEmail(body.email);
 
   if (!nome) {
     return res.status(400).json({ error: 'Nome e obrigatorio.' });
+  }
+
+  if (!EMAIL_REGEX.test(email)) {
+    return res.status(400).json({ error: 'E-mail inválido.' });
   }
 
   const dados = {};
@@ -64,12 +95,23 @@ app.post('/api/respostas', async (req, res) => {
   }
 
   try {
+    const { rows } = await pool.query(
+      'SELECT 1 FROM respostas WHERE LOWER(email) = $1',
+      [email]
+    );
+    if (rows.length > 0) {
+      return res.status(409).json({ error: JA_RESPONDEU });
+    }
+
     await pool.query(
-      'INSERT INTO respostas (nome, dados) VALUES ($1, $2)',
-      [nome, dados]
+      'INSERT INTO respostas (nome, email, dados) VALUES ($1, $2, $3)',
+      [nome, email, dados]
     );
     res.status(201).json({ ok: true });
   } catch (err) {
+    if (err.code === '23505') {
+      return res.status(409).json({ error: JA_RESPONDEU });
+    }
     console.error('Erro ao salvar resposta:', err);
     res.status(500).json({ error: 'Erro ao salvar a resposta. Tente novamente.' });
   }
@@ -117,7 +159,7 @@ function formatValue(value) {
 app.get('/admin', requireAdmin, async (req, res) => {
   try {
     const { rows } = await pool.query(
-      'SELECT id, criado_em, nome, dados FROM respostas ORDER BY criado_em DESC'
+      'SELECT id, criado_em, nome, email, dados FROM respostas ORDER BY criado_em DESC'
     );
 
     const cards = rows.map((row) => {
@@ -130,7 +172,10 @@ app.get('/admin', requireAdmin, async (req, res) => {
       return `
         <article class="resposta">
           <header>
-            <h2>${escapeHtml(row.nome)}</h2>
+            <div>
+              <h2>${escapeHtml(row.nome)}</h2>
+              <p class="email">${escapeHtml(row.email)}</p>
+            </div>
             <time>${new Date(row.criado_em).toLocaleString('pt-BR')}</time>
           </header>
           <div class="campos">${linhas}</div>
@@ -155,6 +200,7 @@ app.get('/admin', requireAdmin, async (req, res) => {
   .resposta { background:#161618; border:1px solid #2a2a2d; border-radius:14px; padding:1.25rem 1.5rem; margin-bottom:1rem; }
   .resposta header { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; flex-wrap:wrap; border-bottom:1px solid #2a2a2d; padding-bottom:.6rem; margin-bottom:.8rem; }
   .resposta h2 { margin:0; font-size:1.1rem; }
+  .resposta .email { margin:.15rem 0 0; color:#8a8a8a; font-size:.82rem; }
   .resposta time { color:#8a8a8a; font-size:.8rem; }
   .campos { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:.5rem 1.5rem; }
   .campo { display:flex; flex-direction:column; gap:.15rem; font-size:.9rem; }
@@ -182,10 +228,10 @@ app.get('/admin', requireAdmin, async (req, res) => {
 app.get('/admin/export.csv', requireAdmin, async (req, res) => {
   try {
     const { rows } = await pool.query(
-      'SELECT id, criado_em, nome, dados FROM respostas ORDER BY criado_em ASC'
+      'SELECT id, criado_em, nome, email, dados FROM respostas ORDER BY criado_em ASC'
     );
 
-    const headers = ['ID', 'Data', 'Nome', ...FIELDS.map(([, label]) => label)];
+    const headers = ['ID', 'Data', 'Nome', 'Email', ...FIELDS.map(([, label]) => label)];
     const lines = [headers.map(csvEscape).join(';')];
 
     for (const row of rows) {
@@ -193,6 +239,7 @@ app.get('/admin/export.csv', requireAdmin, async (req, res) => {
         row.id,
         new Date(row.criado_em).toLocaleString('pt-BR'),
         row.nome,
+        row.email,
         ...FIELDS.map(([key]) => formatValue(row.dados[key])),
       ];
       lines.push(line.map(csvEscape).join(';'));

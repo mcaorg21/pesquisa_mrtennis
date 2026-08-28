@@ -1,4 +1,10 @@
 (function () {
+  var portao = document.getElementById('portao');
+  var formPortao = document.getElementById('formPortao');
+  var mensagemPortao = document.getElementById('mensagemPortao');
+  var btnComecar = document.getElementById('btnComecar');
+  var conteudoPesquisa = document.getElementById('conteudoPesquisa');
+
   var form = document.getElementById('pesquisa');
   var mensagem = document.getElementById('mensagem');
   var btnEnviar = document.getElementById('btnEnviar');
@@ -13,6 +19,63 @@
   var atual = 1;
 
   var CHECKBOX_GROUPS = ['pontoMelhorar', 'fundamentoTreinar', 'taticaTreinar'];
+  var JA_RESPONDEU = 'Este e-mail já respondeu a pesquisa. Obrigado!';
+
+  function limparMensagemPortao() {
+    mensagemPortao.textContent = '';
+    mensagemPortao.className = '';
+  }
+
+  function mostrarErroPortao(texto) {
+    mensagemPortao.textContent = texto;
+    mensagemPortao.className = 'erro';
+  }
+
+  formPortao.addEventListener('submit', function (evento) {
+    evento.preventDefault();
+    limparMensagemPortao();
+
+    var nome = document.getElementById('nomePortao').value.trim();
+    var email = document.getElementById('emailPortao').value.trim().toLowerCase();
+
+    if (!nome) {
+      mostrarErroPortao('Por favor, preencha seu nome.');
+      return;
+    }
+    if (!email) {
+      mostrarErroPortao('Por favor, preencha seu e-mail.');
+      return;
+    }
+
+    btnComecar.disabled = true;
+    btnComecar.textContent = 'Verificando...';
+
+    fetch('/api/verificar-email?email=' + encodeURIComponent(email))
+      .then(function (resp) {
+        if (!resp.ok) return resp.json().then(function (d) { throw new Error(d.error || 'Erro ao verificar e-mail.'); });
+        return resp.json();
+      })
+      .then(function (data) {
+        if (data.jaRespondeu) {
+          mostrarErroPortao(JA_RESPONDEU);
+          return;
+        }
+
+        document.getElementById('nome').value = nome;
+        document.getElementById('email').value = email;
+
+        portao.hidden = true;
+        conteudoPesquisa.hidden = false;
+        irPara(1);
+      })
+      .catch(function (err) {
+        mostrarErroPortao(err.message || 'Erro ao verificar e-mail. Tente novamente.');
+      })
+      .then(function () {
+        btnComecar.disabled = false;
+        btnComecar.textContent = 'Começar';
+      });
+  });
 
   function limparMensagem() {
     mensagem.textContent = '';
@@ -46,18 +109,7 @@
     window.scrollTo({ top: stepper.offsetTop - 12, behavior: 'smooth' });
   }
 
-  function validarPasso1() {
-    var nome = document.getElementById('nome').value.trim();
-    if (!nome) {
-      mostrarErro('Por favor, preencha seu nome antes de continuar.');
-      document.getElementById('nome').focus();
-      return false;
-    }
-    return true;
-  }
-
   btnAvancar.addEventListener('click', function () {
-    if (atual === 1 && !validarPasso1()) return;
     if (atual < TOTAL) irPara(atual + 1);
   });
 
@@ -67,9 +119,7 @@
 
   navBotoes.forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var destino = Number(btn.dataset.goto);
-      if (destino > atual && atual === 1 && !validarPasso1()) return;
-      irPara(destino);
+      irPara(Number(btn.dataset.goto));
     });
   });
 
@@ -92,11 +142,6 @@
   form.addEventListener('submit', function (evento) {
     evento.preventDefault();
     limparMensagem();
-
-    if (!validarPasso1()) {
-      irPara(1);
-      return;
-    }
 
     btnEnviar.disabled = true;
     btnEnviar.textContent = 'Enviando...';
@@ -122,6 +167,4 @@
         btnEnviar.textContent = 'Enviar respostas';
       });
   });
-
-  irPara(1);
 })();
