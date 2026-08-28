@@ -47,6 +47,7 @@ function csvEscape(value) {
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const JA_RESPONDEU = 'Este e-mail já respondeu a pesquisa.';
+const EMAIL_TESTE = 'mcaorg@gmail.com'; // sempre pode reenviar, para testes
 
 function normalizarEmail(valor) {
   return (valor || '').trim().toLowerCase();
@@ -57,6 +58,10 @@ app.get('/api/verificar-email', async (req, res) => {
 
   if (!EMAIL_REGEX.test(email)) {
     return res.status(400).json({ error: 'E-mail inválido.' });
+  }
+
+  if (email === EMAIL_TESTE) {
+    return res.json({ jaRespondeu: false });
   }
 
   try {
@@ -95,6 +100,16 @@ app.post('/api/respostas', async (req, res) => {
   }
 
   try {
+    if (email === EMAIL_TESTE) {
+      await pool.query(
+        `INSERT INTO respostas (nome, email, dados) VALUES ($1, $2, $3)
+         ON CONFLICT (LOWER(email)) DO UPDATE
+         SET nome = EXCLUDED.nome, dados = EXCLUDED.dados, criado_em = now()`,
+        [nome, email, dados]
+      );
+      return res.status(201).json({ ok: true });
+    }
+
     const { rows } = await pool.query(
       'SELECT 1 FROM respostas WHERE LOWER(email) = $1',
       [email]
