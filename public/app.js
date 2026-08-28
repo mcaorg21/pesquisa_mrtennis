@@ -57,6 +57,7 @@
   var btnAvancar = document.getElementById('btnAvancar');
   var btnVoltar = document.getElementById('btnVoltar');
   var sucesso = document.getElementById('sucesso');
+  var carregando = document.getElementById('carregando');
   var progressoFill = document.getElementById('progressoFill');
   var progressoTexto = document.getElementById('progressoTexto');
 
@@ -213,7 +214,8 @@
     }
 
     btnEnviar.disabled = true;
-    btnEnviar.textContent = 'Enviando...';
+    telaPesquisa.hidden = true;
+    carregando.hidden = false;
 
     fetch('/api/respostas', {
       method: 'POST',
@@ -225,13 +227,14 @@
         return resp.json();
       })
       .then(function () {
-        telaPesquisa.hidden = true;
+        carregando.hidden = true;
         sucesso.hidden = false;
       })
       .catch(function (err) {
+        carregando.hidden = true;
+        telaPesquisa.hidden = false;
         mostrarErro(err.message || 'Erro ao enviar. Tente novamente.');
         btnEnviar.disabled = false;
-        btnEnviar.textContent = 'Enviar respostas';
       });
   });
 })();
